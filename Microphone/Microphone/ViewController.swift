@@ -20,7 +20,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
     let filename = "audio.m4a"
 
     var RecButton = UIButton(frame: CGRect(x: 150, y: 300, width: 100, height: 50))
-    var stopButton = UIButton(frame: CGRect(x: 150, y: 400, width: 100, height: 50))
+    var stopButton = UIButton(frame: CGRect(x: 100, y: 400, width: 200, height: 50))
     var playButton = UIButton(frame: CGRect(x: 150, y: 500, width: 100, height: 50))
     //Button actions
     
@@ -46,7 +46,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
       if audioRecorder?.isRecording == false {
           stopButton.isEnabled = true
           RecButton.isEnabled = false
-          
+          stopButton.setTitle("Stop Playing", for: .normal)
+
           do {
               try audioPlayer = AVAudioPlayer(contentsOf: (audioRecorder?.url)!)
               //set to playback mode for optimal volume
@@ -75,7 +76,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
           //reset session mode
           do {
               try audioSession.setCategory(AVAudioSession.Category.playAndRecord)
-            print("STOP")
+
           } catch {
               print(error.localizedDescription)
           }
@@ -109,7 +110,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
     
     //Stop Button
     stopButton.backgroundColor = UIColor(displayP3Red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
-    stopButton.setTitle("Stop", for: .normal)
+    stopButton.setTitle("Stop Reccording", for: .normal)
     stopButton.addTarget(self, action: #selector(stopButtonAction), for: .touchUpInside)
     self.view.addSubview(stopButton)
     
